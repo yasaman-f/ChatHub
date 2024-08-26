@@ -9,7 +9,11 @@ const AuthSchema = joi.object({
     Email: joi.string().email().error(Error.BadRequest("EmailAddress is incorect"))
 })
 
+const otpSchema = joi.object({
+    OTP: joi.string().min(5).max(6).error(Error.BadRequest("OTP must be 5-6 char")),
+})
 
 module.exports = {
-    AuthSchema
+    AuthSchema,
+    otpSchema
 }

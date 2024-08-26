@@ -1,21 +1,22 @@
 document.getElementById('submit').addEventListener('click', async (event) => {
     event.preventDefault();
     try {
-        const data = {};
-        document.querySelectorAll('.input-1 input').forEach(ele => {
-            data[ele.id] = ele.value;
+        let data = {};
+        document.querySelectorAll('.form-control').forEach(ele => {
+            data = {'OTP': ele.value}
         });        
-        const response = await fetch('/api/register/', {
+        console.log(data);
+        const response = await fetch('/api/register/otp', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            credentials: 'include'
         });
 
         if (response.ok) {
-            console.log('Data sent successfully');            
-            window.location.href = '/otp';
+            console.log('Data sent successfully');
         } else {
             const errorData = await response.json();
             console.error('Error:', errorData.message);

@@ -6,6 +6,9 @@ const cors = require("cors")
 const { AllRoutes } = require("./Routes/RouteCenter")
 const fs = require("fs")
 const { Sequelize } = require('sequelize');
+const { EJSRoutes } = require("../Client/Routes/FrontRoute")
+const dotenv = require("dotenv").config()
+const cookieParser = require('cookie-parser');
 
 
 
@@ -25,11 +28,13 @@ module.exports = class Aplication{
     configApplication(){
         this.#app.use(cors())
         this.#app.use(morgan("dev"))
+        this.#app.use(cookieParser())
         this.#app.use(express.json())
         this.#app.use(express.urlencoded({ extended: true }))
         this.#app.use(express.static(path.join(__dirname, "../Public")))
         this.#app.use('/css', express.static(path.join(__dirname, '../Client/CSS')));
         this.#app.use('/js', express.static(path.join(__dirname, '../Client/JS')));
+        this.#app.use('/EJS', express.static(path.join(__dirname, '../Client/EJS')));
    
     }
     initTemplateEngine(){
@@ -37,9 +42,8 @@ module.exports = class Aplication{
         this.#app.set("views", "Client/EJS")
         this.#app.set("layout extractStyles", true)
         this.#app.set("layout extractScripts", true)
-        this.#app.get('/', (req, res) => {
-            res.render('Auth', req.query);
-          });
+        this.#app.use('/', EJSRoutes);
+
     }
     createRoutes(){
         this.#app.use(AllRoutes)
