@@ -13,7 +13,14 @@ const otpSchema = joi.object({
     OTP: joi.string().min(5).max(6).error(Error.BadRequest("OTP must be 5-6 char")),
 })
 
+const prowordSchema = joi.object({
+    filename: joi.string().regex(/(\.png|\.jpg|\.webp|\.jpeg|\.gif)$/).error(Error.BadRequest("The filename incorrect")),
+    fileUploadPath : joi.allow(),
+    Password: joi.string().min(8).regex(/^[A-Za-z][A-Za-z0-9]*$/)
+})
+
 module.exports = {
     AuthSchema,
-    otpSchema
+    otpSchema,
+    prowordSchema
 }

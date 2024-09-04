@@ -9,6 +9,10 @@ router.get('/OTP', (req, res) => {
     res.render('OTP', req.query);
 });
 
+router.get('/proword', (req, res) => {
+    res.render('Password', req.query);
+});
+
 module.exports = {
     EJSRoutes: router
 }

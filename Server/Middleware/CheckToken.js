@@ -6,6 +6,8 @@ const dotenv = require('dotenv').config({ path: path.resolve(__dirname, '../../.
 
 
 const otp = process.env.OTP_TOKEN
+const proword = process.env.PROWORD_TOKEN
+
 
 
 function getToken(params) {
@@ -18,11 +20,17 @@ function checkToken(req, res , next) {
     try {
         let TokenName;
         let secretKey;
-        let Errorr
         const path = req.path;
-        if(path == "/otp"){
+
+        if( path == "/otp" ){
+
             TokenName = "Check-OTP-Token"
-            secretKey = otp            
+            secretKey = otp   
+
+        }else if( path == "/proword" ){
+
+            TokenName = "PROWORD-Token"
+            secretKey = proword  
         }
         
         const cooki = `Bearer ${req.cookies[TokenName]}`

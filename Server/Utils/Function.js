@@ -1,6 +1,7 @@
 const { UserModel } = require("../Model/User");
 const jwt = require("jsonwebtoken")
 const Error = require("http-errors");
+const crypto = require("crypto")
 
 
 function NumberMaker() {
@@ -14,7 +15,7 @@ function AccessToken(Id, secretKey) {
           email: user.Email
         };
         const options = {
-            expiresIn: "3m"
+            expiresIn: "15m"
         };
                 
         jwt.sign(payload, secretKey, options, (err, token) => {
@@ -22,9 +23,19 @@ function AccessToken(Id, secretKey) {
             resolve(token)
         })
     })
-  }
+}
+
+
+function hashPassword(pass) {
+    const salt = crypto.randomBytes(16).toString('hex')
+    const hash = crypto.pbkdf2Sync(pass, salt, 1000, 64, "sha512").toString('hex')
+    const newHash = `$QJHiWe@jwOkd.${salt}.${hash}`
+    return newHash 
+}
+
 
 module.exports = {
     NumberMaker,
-    AccessToken
+    AccessToken,
+    hashPassword
 }

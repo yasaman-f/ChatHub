@@ -5,7 +5,6 @@ document.getElementById('submit').addEventListener('click', async (event) => {
         document.querySelectorAll('.form-control').forEach(ele => {
             data = {'OTP': ele.value}
         });        
-        console.log(data);
         const response = await fetch('/api/register/otp', {
             method: 'POST',
             headers: {
@@ -17,6 +16,8 @@ document.getElementById('submit').addEventListener('click', async (event) => {
 
         if (response.ok) {
             console.log('Data sent successfully');
+            window.location.href = '/proword';
+
         } else {
             const errorData = await response.json();
             console.error('Error:', errorData.message);
