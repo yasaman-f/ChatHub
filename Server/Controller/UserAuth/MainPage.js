@@ -12,6 +12,7 @@ const dotenv = require('dotenv').config({ path: path.resolve(__dirname, '../../.
 
 const otp = process.env.OTP_TOKEN
 const proword = process.env.PROWORD_TOKEN
+const info = process.env.USER_INFO
 
 
 class AuthUser extends Controller{
@@ -31,7 +32,7 @@ class AuthUser extends Controller{
             }
             const user = await UserModel.findOne({where: {Email: Email}})            
             
-            const access = await AccessToken(user.id, otp)
+            const access = await AccessToken(user.id, otp, "3m")
             res.cookie('Check-OTP-Token', access, {maxAge: 43200000 })
             const code = NumberMaker()
             await UserModel.update(
@@ -64,7 +65,7 @@ class AuthUser extends Controller{
         }  
 
         res.clearCookie('Check-OTP-Token');
-        const access = await AccessToken(findUser.id, proword)
+        const access = await AccessToken(findUser.id, proword, "10m")
         res.cookie('PROWORD-Token', access, {maxAge: 43200000 })
 
         return res.status(HttpStatus.OK).json({
@@ -79,7 +80,7 @@ class AuthUser extends Controller{
       }
     }
     async CompleteUserInformation (req, res, next){
-      try {
+      try {        
         await prowordSchema.validateAsync(req.body)
         let { Password, fileUploadPath, filename } = req.body
 
@@ -90,15 +91,19 @@ class AuthUser extends Controller{
         const findUser = await UserModel.findOne({where: {Email: req.user.Email}}) 
         Password = hashPassword(Password)
 
-
         await UserModel.update(
-          {Profile: req.body.image, Password: Password }, 
+          {Profile: req.body.image, Password: Password, IsVerified: true}, 
           {
               where: {
                 Email: findUser.Email 
               }
           }
-      );
+        );
+
+        res.clearCookie('PROWORD-Token');
+        const access = await AccessToken(findUser.id, info, "60m")
+        res.cookie('User-Info', access, {maxAge: 43200000 })
+
         return res.status(HttpStatus.OK).json({
           statusCode: HttpStatus.OK,
           data: {

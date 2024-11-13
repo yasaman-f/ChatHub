@@ -17,7 +17,10 @@ document.getElementById('submit').addEventListener('click', async (event) => {
 
     const formData = new FormData();
     formData.append('Profile', fileInput.files[0]);
-    formData.append('Password', Password);    
+    formData.append('Password', Password);
+    
+    console.log(formData);
+    
 
     const response = await fetch('/api/register/proword', {
         method: 'POST',
@@ -25,7 +28,7 @@ document.getElementById('submit').addEventListener('click', async (event) => {
     })
     if (response.ok) {
         console.log('Data sent successfully');
-        window.location.href = '/proword';
+        window.location.href = '/chatHub';
 
     } else {
         const errorData = await response.json();

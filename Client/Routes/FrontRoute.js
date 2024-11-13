@@ -13,6 +13,10 @@ router.get('/proword', (req, res) => {
     res.render('Password', req.query);
 });
 
+router.get('/chatHub', (req, res) => {
+    res.render('Chat', req.query);
+});
+
 module.exports = {
     EJSRoutes: router
 }

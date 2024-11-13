@@ -1,0 +1,371 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(0, 55, 76);
+}
+
+header {
+    background-color: rgb(0, 55, 76);
+    color: rgb(120, 200, 231);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid rgb(120, 200, 231);
+}
+
+.user-profile {
+    margin-left: 18rem;
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgb(120, 200, 231);
+    margin-right: 10px;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 100px);
+    scrollbar-color: rgb(0, 55, 76) rgb(120, 200, 231);  
+}
+
+.friends-list {
+    width: 25%;
+    background-color: rgb(0, 55, 76);
+    padding: 20px;
+    border-right: 2px solid rgb(120, 200, 231);
+    color: rgb(120, 200, 231);
+    overflow-y: auto;
+}
+
+.friends-list h2 {
+    margin-top: 8px;
+    font-size: 20px;
+    padding-bottom: 3px;
+}
+
+.friends-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friends-list li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.friends-list img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.NamespaceList img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.svg{
+    margin-left: 17rem;
+    margin-top: 11rem;
+    cursor: pointer;
+    
+}
+
+.chat-window {
+    width: 75%;
+    padding: 20px;
+    background-color: rgb(0, 55, 76);
+    color: rgb(120, 200, 231);
+}
+
+.chat-window h2 {
+    margin-top: 0;
+    font-size: 20px;
+    border-bottom: 2px solid rgb(120, 200, 231);
+    padding-bottom: 10px;
+}
+
+.messages {
+    height: 80%;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.messages p {
+    padding: 10px;
+    border-radius: 15px;
+    margin: 5px 0;
+    max-width: 10%;
+    height: 1rem;
+}
+
+.messages p {
+    display: block;
+}
+
+.messages p:nth-child(odd) {
+    background-color: rgb(0, 38, 53);
+    text-align: center;
+}
+
+.messages p:nth-child(even) {
+    background-color: rgb(1, 74, 103);
+    text-align: center;
+    margin-left: auto;
+}
+
+#message-input {
+    width: calc(100% - 220px);
+    padding: 10px;
+    border-radius: 10px;
+    --border-width: 1px;
+    height: 2rem;
+    border: var(--border-width) solid rgb(120, 200, 231);
+    color: rgb(120, 200, 231);
+    background-color:rgb(0, 55, 76);
+    outline: none;
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
+
+
+#send-button, #GPS-button, #File-button {
+    padding: 10px;
+    background-color: rgb(120, 200, 231);
+    color: rgb(0, 55, 76);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#send-button:hover, #GPS-button:hover, #File-button:hover {
+    background-color: #357ab8;
+}
+
+.Friend1, .Friend2, .Friend3, .Friend4{
+    display: flex;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 55, 76);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(120, 200, 231);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
+}
+
+.popup form {
+    width: 25rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup label {
+    margin-bottom: 5px;
+    color: rgb(120, 200, 231);
+}
+
+.popup input {
+    background-color:rgb(0, 55, 76);
+    border: 2px solid rgb(120, 200, 231);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+    height: 1.5rem;
+    color: rgb(120, 200, 231);
+    font-size: large;
+}
+
+.popup button {
+    background-color:rgb(0, 38, 53);
+    border: 1px solid rgb(120, 200, 231);
+    border-radius: 20px;
+    margin-top: 2rem;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.popup button:hover {
+    background-color:rgb(1, 27, 38);
+    color: rgb(120, 200, 231);
+}
+
+#friendsHeader{
+    cursor: pointer;
+}
+
+#friendsList {
+    display: none;
+    position: fixed;
+    top: 16%;
+    left: 21%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    z-index: 800;
+}
+
+#friendsList li {
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.308);
+    border: 1px solid #000000;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+#friendsList li:hover {
+    color: rgb(120, 200, 231);
+    background-color: rgba(0, 0, 0, 0.595);
+
+}
+
+.popupFormNamespace {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 55, 76);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid rgb(120, 200, 231);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
+}
+
+.popupFormNamespace form {
+    width: 25rem;
+    height: 32rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.popupFormNamespace label {
+    margin-bottom: 5px;
+    color: rgb(120, 200, 231);
+}
+
+.popupFormNamespace input {
+    background-color:rgb(0, 55, 76);
+    border: 2px solid rgb(120, 200, 231);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+    height: 1.5rem;
+    color: rgb(120, 200, 231);
+    font-size: large;
+}
+
+.popupFormNamespace button {
+    background-color:rgb(0, 38, 53);
+    border: 1px solid rgb(120, 200, 231);
+    border-radius: 20px;
+    margin-top: 2rem;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.popupFormNamespace button:hover {
+    background-color:rgb(1, 27, 38);
+    color: rgb(120, 200, 231);
+}
+
+.user-icon {
+    margin-left: 5rem;
+    position: relative;
+}
+
+.camera-icon {
+    margin-top: 12.5rem ;
+    margin-right: 9rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%); 
+    border-radius: 50%; 
+    border: 2px solid rgba(255, 255, 255, 0); 
+    cursor: pointer;
+}
+
+.NamespaceList{
+    position: fixed;
+    top: 22%;
+    left: 7%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 38, 53);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 700;
+    padding: 0px 10px;
+}
+
+.NamespaceList li{
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-bottom: 1px solid rgb(120, 200, 231);
+    cursor: pointer;
+    list-style-type: none;
+}
+
+.NamespaceList li:hover{
+    color: rgb(120, 200, 231);
+}
+
+.UpInfo{
+    display: flex;
+    border-bottom: 2px solid rgb(120, 200, 231);
+
+}
+
+#pic-profile {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid rgb(0, 38, 53);
+    margin-right: 10px;
+}

@@ -4,6 +4,7 @@ const sequelize = new Sequelize('postgres://ChatHub:A8XqYEWSVFRgBth@localhost:54
 });
 
 const User = sequelize.define('User', {
+    id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
     FirstName: {type: DataTypes.STRING, allowNull: false},
     LastName: {type: DataTypes.STRING, allowNull: false},
     UserName: {type: DataTypes.STRING, allowNull: false},
@@ -18,7 +19,7 @@ const User = sequelize.define('User', {
     },
     Profile: {type: DataTypes.STRING},
     Role  : { type: DataTypes.STRING, defaultValue: "USER" },
-    IsVerified  : { type: DataTypes.BOOLEAN, defaultValue: true },
+    IsVerified  : { type: DataTypes.BOOLEAN, defaultValue: false }
 });
 
 sequelize.sync()

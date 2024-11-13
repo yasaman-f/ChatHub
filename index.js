@@ -1,3 +1,4 @@
-const Application = require("./Server/server")
+const Application = require("./Server/server");
 
-new Application(3001)
+const app = new Application(3001);
+
